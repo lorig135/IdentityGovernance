@@ -61,4 +61,7 @@ Currently, the installer script can only be run once per environment. If you are
 - openidm/ui/admin/default/configAppConfiguration.js
 - openidm/ui/selfservice/default/configAppConfiguration.js
 
+## Post-Installation Tasks
+Additional configuration is needed on each node as described to support the following use cases:
+
 
