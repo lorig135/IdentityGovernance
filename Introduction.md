@@ -28,14 +28,37 @@ The command can be run with the following optional argument:
 - openidm_admin: User ID for user with openidm-admin role.
 - openidm_admin_password: Password for IDM administrator.
 - openidm_database_type: ‘MsSQL’ or ‘MySQL’ only for ForgeRock Access Review 2.5.1.
-Note: Names are those found in the properties file. If a properties file is not used, equivalent input will be gathered directly from the installer.
-
-The installer will print updates to the console until installation completes. 
+Note: Names are those found in the properties file. If a properties file is not used, equivalent input will be gathered directly from the installer. The installer will print updates to the console until installation completes. 
 
 1. Restart IDM. 
 1. Enable Audit Event Handler: repo: 
+1. Log into IDM as an IDM administrator
+1. Navigate to the Admin View, and click  on Configure System Preferences. 
+1. From the Event Handlers section of the Audit tab, click edit for the RepositoryAuditEventHandler. The Edit Audit Event Handler: Repo dialog box displays. 
+EDIT EVENT HANDLER REPO SCREENSHOT HERE
 
+1. In the dialog box, click Enabled, then Submit. 
  
- 
+## Installing in a Clustered Environment
+Currently, the installer script can only be run once per environment. If you are working in a clustered environment, you'll need to manually copy the artifacts over to subsequent nodes once the installer has run on the initial node. The following require replication on each node after the first:
+
+1. Copy the following files from the installer zip into the IDM installation directory:
+- Everything in the ./openidm/script directory, copied into the script directory of the installation
+- Everything in the ./openidm/conf directory, copied into the conf directory of the installation
+- Everything in the ./openidm/workflow directory, copied into the workflow directory of the installation
+- Everything in the ./openidm/tools directory, copied into the tools directory of the installation
+- Everything in the ./openidm/bundle directory, copied into the bundle directory of the installation
+- The entire ./openidm/governance directory, copied into the openidm installation directory
+- The entire ./legal-notices directory, copied into the openidm installation directory
+
+2. Copy the following files from the first node’s IDM installation directory:
+- openidm/script/access.js
+- openidm/conf/managed.json
+- openidm/conf/repo.jdbc.json
+- openidm/conf/policy.json
+- openidm/conf/IDG-queries.json
+- openidm/bin/defaults/script/ui/onDelete-user-cleanup.js
+- openidm/ui/admin/default/configAppConfiguration.js
+- openidm/ui/selfservice/default/configAppConfiguration.js
 
 
